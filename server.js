@@ -3,11 +3,14 @@ const dotenv = require('dotenv')
 const colors = require('colors')
 const morgan = require('morgan')
 const cors = require('cors')
+const connectDB = require('./config/db')
 
 // dot config
 dotenv.config() // jab root me hoga to sirf confit karege
 // nahi to dotenv.config('path jaha file present hai')
 
+//mongodb connection
+connectDB();
 
 // rest object
 const app = express()
@@ -21,7 +24,7 @@ app.use(morgan('dev'))
 // test routes
 app.use('/api/v1/test',require('./routes//testRoutes'));
 
-// port
+// port 
 const PORT = process.env.PORT || 8080
 
 
