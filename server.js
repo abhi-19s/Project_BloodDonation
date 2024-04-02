@@ -6,7 +6,7 @@ const cors = require('cors')
 const connectDB = require('./config/db')
 
 // dot config
-dotenv.config() // jab root me hoga to sirf confit karege
+dotenv.config() // jab root me hoga to sirf config karege
 // nahi to dotenv.config('path jaha file present hai')
 
 //mongodb connection
@@ -24,6 +24,7 @@ app.use(morgan('dev'))
 // routes
 app.use('/api/v1/test',require('./routes//testRoutes'));
 app.use('/api/v1/auth',require('./routes/authRoutes'))
+app.use('/api/v1/inventory',require('./routes/inventoryRoutes'))
 
 // port 
 const PORT = process.env.PORT || 8080

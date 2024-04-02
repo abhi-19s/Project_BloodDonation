@@ -50,7 +50,13 @@ const loginController = async(req,res)=>{
                 message:'User not found'
             })
         }
-
+        // check role
+        if(user.role !== req.body.role){
+            return res.status(500).send({
+                success:false,
+                message:'role does not match'
+            })
+        }
         // compare passowrd
         const comparePassword = await bcrypt.compare(req.body.password,user.password)
         if(!comparePassword){
@@ -78,5 +84,25 @@ const loginController = async(req,res)=>{
     }
 }
 
+// get current user
 
-module.exports = {registerController,loginController}
+const currentUserController = async(req,res)=>{
+    try {
+        const user = await userModel.findOne({_id:req.body.userId})
+        return res.status(200).send({
+            success:true,
+            message:'user fetched successfully',
+            user,
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send()({
+            success:false,
+            message:'unable to get current user',
+            error
+        })
+    }
+}
+
+module.exports = {registerController,loginController,currentUserController}
