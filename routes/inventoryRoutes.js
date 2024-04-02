@@ -1,6 +1,6 @@
 const express = require('express')
 const authMiddleware = require('../middlewares/authMiddleware')
-const { createInventoryController } = require('../controllers/inventoryController')
+const { createInventoryController, getInventoryController } = require('../controllers/inventoryController')
 
 const router = express.Router()
 
@@ -8,5 +8,7 @@ const router = express.Router()
 // ADD INVENTORY || post
 router.post('/create-inventory',authMiddleware,createInventoryController)
 
+// get all blood records
+router.get('/get-inventory',authMiddleware,getInventoryController)
 
 module.exports = router
